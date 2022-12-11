@@ -1,25 +1,27 @@
 package com.example.calculadora
 
+import android.content.pm.PackageManager.ComponentEnabledSetting
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.calculadora.ui.theme.CalculadoraTheme
+import com.example.calculadora.ui.theme.DarkRed
 
 
 class MainActivity : ComponentActivity() {
@@ -37,22 +39,14 @@ class MainActivity : ComponentActivity() {
                     when (configuration.orientation) {
                         Configuration.ORIENTATION_LANDSCAPE -> {
                             Row() {
-                                Column(Modifier.weight(1f)) {
-                                    DisplayCalculadora()
-                                }
-                                Column(Modifier.weight(1f)) {
-                                    DisplayBotonera()
-                                }
+                                Display(Modifier.weight(1f))
+                                Botonera(Modifier.weight(1f))
                             }
                         }
                         else -> {
                             Column() {
-                                Row(Modifier.weight(1.5f)) {
-                                    DisplayCalculadora()
-                                }
-                                Row(Modifier.weight(5f)) {
-                                    DisplayBotonera()
-                                }
+                                Display(Modifier.weight(1.5f))
+                                Botonera(Modifier.weight(5f))
                             }
                         }
                     }
@@ -62,13 +56,15 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun DisplayCalculadora(
+    fun Display(
+        modifier: Modifier = Modifier
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.White)
-                .padding(start = 20.dp, end = 20.dp, top = 40.dp, bottom = 20.dp),
+                .padding(start = 20.dp, end = 20.dp, top = 40.dp, bottom = 20.dp)
+                .then(modifier),
             contentAlignment = Alignment.BottomEnd,
         )
         {
@@ -83,16 +79,21 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun DisplayBotonera(
+    fun Botonera(
+        modifier: Modifier
     ) {
-        Column() {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .then(modifier)
+        ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(0.66f)
             ) {
-                BotonM("MC", Modifier.weight(1f))
-                BotonM("MR", Modifier.weight(1f))
+                BotonM("MC", Modifier.weight(1f), enabled = false) // Color omitted. Has already one by default and don't want to change it.
+                BotonM("MR", Modifier.weight(1f), enabled = false)
                 BotonM("M+", Modifier.weight(1f))
                 BotonM("M-", Modifier.weight(1f))
                 BotonM("MS", Modifier.weight(1f))
@@ -107,7 +108,7 @@ class MainActivity : ComponentActivity() {
                 BotonCalculadora("%", Modifier.weight(1f))
                 BotonCalculadora("CE", Modifier.weight(1f))
                 BotonCalculadora("C", Modifier.weight(1f))
-                BotonCalculadora("\u232B", Modifier.weight(1f))
+                BotonCalculadora("\u232B", Modifier.weight(1f), DarkRed) // test to check param Color
             }
             Row(
                 modifier = Modifier
@@ -166,17 +167,26 @@ class MainActivity : ComponentActivity() {
     fun BotonM(
         text: String,
         modifier: Modifier = Modifier,
-        color: Color = Color.DarkGray
+        color: Color = Color.DarkGray,
+        enabled: Boolean = true
     ) {
-        Box(
-            contentAlignment = Alignment.Center,
+        Button(
+            onClick = { /*TODO*/},
+            enabled = enabled,
             modifier = Modifier
                 .fillMaxSize(1f)
-                .border(1.dp, color = Color.LightGray)
-                .background(color)
-                .then(modifier)
+                .then(modifier),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = color,
+                contentColor = Color.LightGray
+            ),
+            shape =  RectangleShape,
+            border = BorderStroke(1.dp, color = Color.LightGray),
+            contentPadding = PaddingValues(top = 1.dp, bottom = 1.dp)
         ) {
-            Text(text = text, fontSize = 25.sp, color = Color.White)
+            Text(text = text,
+                fontSize = 24.sp,
+                color = Color.White)
         }
     }
 
@@ -186,13 +196,18 @@ class MainActivity : ComponentActivity() {
         modifier: Modifier = Modifier,
         color: Color = Color.DarkGray
     ) {
-        Box(
-            contentAlignment = Alignment.Center,
+        Button(
+            onClick = { /*TODO*/},
             modifier = Modifier
                 .fillMaxSize(1f)
-                .border(1.dp, color = Color.LightGray)
-                .background(color)
-                .then(modifier)
+                .then(modifier),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = color,
+                contentColor = Color.LightGray
+            ),
+            shape =  RectangleShape,
+            border = BorderStroke(1.dp, color = Color.LightGray),
+            contentPadding = PaddingValues(top = 1.dp, bottom = 1.dp)
         ) {
             Text(text = text, fontSize = 40.sp, color = Color.White)
         }
