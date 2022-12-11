@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">estevez_ivan_ex1tDist</string>
+    <string name="hola_coma">"Hola, "</string>
+    <string name="hola_placeholder">"Hola, %1$s"</string>
+    <string name="hola_mundo">Hola mundo</string>
+</resources>
