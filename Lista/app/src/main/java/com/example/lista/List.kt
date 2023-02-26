@@ -1,10 +1,12 @@
 package com.example.lista
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun List(
     list: List<ShoppingInventory>,
@@ -22,8 +24,10 @@ fun List(
                 itemName = item.label,
                 checked = item.checked,
                 onCheckedChange = { checked -> onCheckedItem(item, checked) },
-                onClose = { onCloseItem(item) }
+                onClose = { onCloseItem(item) },
+                modifier = modifier.animateItemPlacement()
             )
         }
     }
 }
+

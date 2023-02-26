@@ -16,7 +16,7 @@ class ViewModel : ViewModel() {
         item: ShoppingInventory,
         checked: Boolean
     ) =
-        items.find { item.id == item.id }?.let { item ->
+        items.find { it.id == item.id }?.let { item ->
             item.checked = checked
         }
 }

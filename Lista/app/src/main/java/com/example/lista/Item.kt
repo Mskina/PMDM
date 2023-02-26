@@ -1,11 +1,10 @@
 package com.example.lista
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Checkbox
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
@@ -21,25 +20,34 @@ fun Item(
     onClose: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Text(
-            modifier = Modifier
-                .weight(1f)
-                .padding(start = 16.dp),
-            text = itemName
-        )
-        Checkbox(
-            checked = checked,
-            onCheckedChange = onCheckedChange
-        )
-        IconButton(onClick = onClose) {
-            Icon(
-                Icons.Filled.Close,
-                contentDescription = "Close"
-            )
+    Box(modifier = modifier) {
+        Card(
+            shape = RoundedCornerShape(10.dp),
+            backgroundColor = MaterialTheme.colors.secondary,
+            elevation = 3.dp,
+            modifier = Modifier.padding(16.dp, 6.dp, 16.dp, 6.dp)
+        ) {
+            Row(
+                modifier = modifier,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 16.dp),
+                    text = itemName
+                )
+                Checkbox(
+                    checked = checked,
+                    onCheckedChange = onCheckedChange
+                )
+                IconButton(onClick = onClose) {
+                    Icon(
+                        Icons.Filled.Close,
+                        contentDescription = "Close"
+                    )
+                }
+            }
         }
     }
 }
