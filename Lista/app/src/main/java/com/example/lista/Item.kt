@@ -9,41 +9,21 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun StatefulShoppingInventoryItem(
-    itemName: String,
-    onClose: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    var checkedState by rememberSaveable { mutableStateOf(false) }
-
-    StatelessShoppingInventoryItem(
-        itemName = itemName,
-        checked = checkedState,
-        onCheckedChange = { newValue -> checkedState = newValue },
-        onClose = onClose,
-        modifier = modifier,
-    )
-}
-
-@Composable
-fun StatelessShoppingInventoryItem(
+fun Item(
     itemName: String,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     onClose: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = modifier, verticalAlignment = Alignment.CenterVertically
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
             modifier = Modifier
@@ -56,7 +36,10 @@ fun StatelessShoppingInventoryItem(
             onCheckedChange = onCheckedChange
         )
         IconButton(onClick = onClose) {
-            Icon(Icons.Filled.Close, contentDescription = "Close")
+            Icon(
+                Icons.Filled.Close,
+                contentDescription = "Close"
+            )
         }
     }
 }

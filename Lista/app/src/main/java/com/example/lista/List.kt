@@ -6,8 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun ShoppingInventoryList(
+fun List(
     list: List<ShoppingInventory>,
+    onCheckedItem: (ShoppingInventory, Boolean) -> Unit,
     onCloseItem: (ShoppingInventory) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -17,8 +18,10 @@ fun ShoppingInventoryList(
         items(
             items = list,
             key = { item -> item.id }) { item ->
-            StatefulShoppingInventoryItem(
+            Item(
                 itemName = item.label,
+                checked = item.checked,
+                onCheckedChange = { checked -> onCheckedItem(item, checked) },
                 onClose = { onCloseItem(item) }
             )
         }
