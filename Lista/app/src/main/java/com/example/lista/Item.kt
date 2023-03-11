@@ -1,6 +1,6 @@
 package com.example.lista
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,34 +20,32 @@ fun Item(
     onClose: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Box(modifier = modifier) {
-        Card(
-            shape = RoundedCornerShape(10.dp),
-            backgroundColor = MaterialTheme.colors.secondary,
-            elevation = 3.dp,
-            modifier = Modifier.padding(16.dp, 6.dp, 16.dp, 6.dp)
+    Card(
+        modifier = modifier.padding(16.dp, 6.dp, 16.dp, 6.dp),
+        shape = RoundedCornerShape(10.dp),
+        backgroundColor = MaterialTheme.colors.secondary,
+        elevation = 3.dp,
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Row(
-                modifier = modifier,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(start = 16.dp),
-                    text = itemName
+            Text(
+                text = itemName,
+                Modifier
+                    .weight(1f)
+                    .padding(start = 16.dp)
+            )
+            Checkbox(
+                checked = checked,
+                onCheckedChange = onCheckedChange
+            )
+            IconButton(onClick = onClose) {
+                Icon(
+                    Icons.Filled.Close,
+                    contentDescription = "Close"
                 )
-                Checkbox(
-                    checked = checked,
-                    onCheckedChange = onCheckedChange
-                )
-                IconButton(onClick = onClose) {
-                    Icon(
-                        Icons.Filled.Close,
-                        contentDescription = "Close"
-                    )
-                }
             }
         }
     }
+
 }

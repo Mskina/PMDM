@@ -25,7 +25,8 @@ fun List(
                 checked = item.checked,
                 onCheckedChange = { checked -> onCheckedItem(item, checked) },
                 onClose = { onCloseItem(item) },
-                modifier = modifier.animateItemPlacement()
+                modifier = Modifier.animateItemPlacement() // Este modifier debe ser nuevo para no arrastrar paddingValues
+                // Alejandro no pasa modifier porque no hace animación.
             )
         }
     }
