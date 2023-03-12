@@ -12,6 +12,16 @@ class ViewModel : ViewModel() {
         _items.remove(item)
     }
 
+    fun add(item: ShoppingInventory) {
+        _items.add(item)
+    }
+
+    fun updateItemLabel(item: ShoppingInventory, input: String) {
+        items.find { it.id == item.id }?.let { item ->
+            item.label = input
+        }
+    }
+
     fun changeItemChecked(
         item: ShoppingInventory,
         checked: Boolean
@@ -19,6 +29,8 @@ class ViewModel : ViewModel() {
         items.find { it.id == item.id }?.let { item ->
             item.checked = checked
         }
+
 }
 
-private fun getItems() = List(30) { i -> ShoppingInventory(i, "Item $i") }
+private fun getItems() = List(5) { i -> ShoppingInventory(i, "Item $i") }
+
