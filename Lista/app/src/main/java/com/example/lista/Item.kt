@@ -1,10 +1,7 @@
 package com.example.lista
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.relocation.BringIntoViewRequester
-import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
@@ -30,7 +27,6 @@ fun Item(
 ) {
 
     val requester = remember { FocusRequester() }
-
 
     Card(
         modifier = modifier.padding(16.dp, 6.dp, 16.dp, 6.dp),

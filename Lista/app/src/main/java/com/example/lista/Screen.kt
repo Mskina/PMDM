@@ -35,8 +35,6 @@ fun Screen() {
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
-    var id = viewModel.items.size
-
     Scaffold(
         topBar = {
             TopAppBar {
@@ -59,8 +57,7 @@ fun Screen() {
         }, floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    val newID = id++
-                    viewModel.add(ShoppingInventory(id = newID, label = ""))
+                    viewModel.add(ShoppingInventory(label = ""))
                     coroutineScope.launch {
                         listState.animateScrollBy(value = 10000f,
                             animationSpec = tween(durationMillis = 5000))

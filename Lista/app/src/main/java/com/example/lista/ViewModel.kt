@@ -32,5 +32,5 @@ class ViewModel : ViewModel() {
 
 }
 
-private fun getItems() = List(5) { i -> ShoppingInventory(i, "Item $i") }
+private fun getItems() = List(5) { i -> ShoppingInventory("Item $i") }
 
